@@ -7,6 +7,8 @@ const fs = Promise.promisifyAll(require('fs-extra'))
 const path = require('path')
 const uglify = require('uglify-es')
 
+const serverPath = "./serverRepo/server/"
+
 module.exports = Promise.mapSeries([
   /**
    * SimpleMDE
@@ -71,12 +73,12 @@ module.exports = Promise.mapSeries([
   () => {
     console.info(colors.white('  └── ') + colors.green('Copying i18n client files...'))
     return fs.ensureDirAsync('./assets/js/i18n').then(() => {
-      return fs.readJsonAsync('./server/locales/en/browser.json').then(enContent => {
-        return fs.readdirAsync('./server/locales').then(langs => {
+      return fs.readJsonAsync(serverPath+'locales/en/browser.json').then(enContent => {
+        return fs.readdirAsync(serverPath+'locales').then(langs => {
           return Promise.map(langs, lang => {
             console.info(colors.white('      ' + lang + '.json'))
             let outputPath = path.join('./assets/js/i18n', lang + '.json')
-            return fs.readJsonAsync(path.join('./server/locales', lang, 'browser.json'), 'utf8').then((content) => {
+            return fs.readJsonAsync(path.join(serverPath+'locales', lang, 'browser.json'), 'utf8').then((content) => {
               return fs.outputJsonAsync(outputPath, _.defaultsDeep(content, enContent))
             }).catch(err => { // eslint-disable-line handle-callback-err
               return fs.outputJsonAsync(outputPath, enContent)

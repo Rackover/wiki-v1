@@ -1,0 +1,3 @@
+[submodule "serverRepo"]
+	path = serverRepo
+	url = https://github.com/louvekingdoms/wikiJS-v1-fork

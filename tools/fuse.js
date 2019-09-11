@@ -6,6 +6,8 @@
  * Client & Server compiler / bundler / watcher
  */
 
+const serverPath = "serverRepo/server/"
+
 const colors = require('colors/safe')
 const fsbx = require('fuse-box')
 const nodemon = require('nodemon')
@@ -141,7 +143,7 @@ globalTasks.then(() => {
         exec: (args.d) ? 'node server' : 'node wiki configure',
         ignore: ['assets/', 'client/', 'data/', 'repo/', 'tests/'],
         ext: 'js json',
-        watch: (args.d) ? ['server'] : ['server/configure.js'],
+        watch: (args.d) ? ['server'] : [serverPath+'configure.js'],
         env: { 'NODE_ENV': 'development' }
       })
     } else {
