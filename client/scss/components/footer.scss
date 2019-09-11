@@ -1,10 +1,11 @@
 .footer {
+    text-align:center;
 	background-color: mc('blue-grey','50');
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 	padding: 0 25px;
-  height: 70px;
+  height: 30px;
 	font-size: 13px;
 	font-weight: 500;
 	color: mc('blue-grey','500');
@@ -15,14 +16,16 @@
   transition: background-color 1s ease;
 
 	ul {
+        width:100%;
 		padding: 0;
 		margin: 0;
 		list-style-type: none;
 		display: flex;
-		justify-content: center;
+		justify-content: space-between;
 		align-items: center;
 
 		li {
+            font-weight:bold;
 			padding: 0 15px;
 		}
 
