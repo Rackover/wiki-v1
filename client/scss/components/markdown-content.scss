@@ -17,18 +17,20 @@
   overflow: hidden;
 
 	h1, h2, h3 {
-		font-weight: 400;
 		margin: 10px 0 0;
+        margin-left:5px;
 		padding: 7px 20px;
 		font-weight: 500;
+        display: flex;
+        justify-content: space-between;
 	}
 
 	h1 {
-		background-color: mc('blue-grey', '50');
-    background: linear-gradient(to bottom, mc('blue-grey', '50'), mc('indigo', '50'));
 		border-bottom: 2px solid mc('indigo', '100');
-		font-size: 18px;
+        border-radius: 5px;
+		font-size: 1.5em;
 		color: mc('indigo', '500');
+		background:linear-gradient(to bottom, rgba(255, 255, 255, 0), mc('indigo', '50'));
 
 		&:first-child {
 			margin-top: 1px;
@@ -46,20 +48,13 @@
 	}
 
 	h2 {
-		background-color: lighten(mc('teal', '50'), 5%);
-    background: linear-gradient(to bottom, lighten(mc('teal', '50'), 5%), mc('teal', '50'));
-		border: 1px solid mc('teal', '100');
-		border-right-width: 5px;
-		border-top-left-radius: 3px;
+		border-bottom: 1px solid mc('indigo', '100');
 		border-bottom-left-radius: 3px;
-		font-size: 16px;
-		color: mc('teal', '900');
-		margin-left: 20px;
+		font-size: 1.25em;
+        font-weight:bold;
 	}
 
 	.indent-h2 {
-		border-right: 5px solid mc('teal', '100');
-		margin-left: 20px;
 		padding-top: 1px;
 		padding-bottom: 20px;
 		overflow: hidden;
@@ -80,22 +75,13 @@
 	}
 
 	h3 {
-		background-color: lighten(mc('blue', '50'), 3%);
-    background: linear-gradient(to bottom, lighten(mc('blue', '50'), 3%), mc('blue', '50'));
-		border: 1px solid mc('blue', '100');
-		border-right-width: 5px;
-		border-top-left-radius: 3px;
 		border-bottom-left-radius: 3px;
-		font-size: 14px;
-		color: mc('blue', '700');
-		margin-left: 20px;
-		margin-right: 1px;
+		font-size: 1em;
+        font-weight:bold;
 		padding: 5px 20px;
 	}
 
 	.indent-h3 {
-		border-right: 5px solid mc('teal', '100');
-		margin-left: 20px;
 		margin-right: 1px;
 		padding-bottom: 10px;
 
@@ -119,14 +105,9 @@
 
 		&.toc-anchor {
 			font-size: 80%;
-			color: mc('indigo', '300');
+			color: mc('indigo', '100');
 			border-bottom: none;
 			text-decoration: none;
-
-			&:visited {
-				color: mc('indigo', '300') !important;
-			}
-
 		}
 
 		&.external-link {
@@ -364,7 +345,7 @@
 		border-top: 1px dotted mc('grey', '500');
 	}
 
-	blockquote {
+	blockquote, div.warning {
 		background-color: mc('teal', '50');
     background: linear-gradient(to bottom right, lighten(mc('teal', '50'), 5%), mc('teal', '50'));
 		border: 1px solid mc('teal', '100');
@@ -425,5 +406,4 @@
 		}
 
 	}
-
 }

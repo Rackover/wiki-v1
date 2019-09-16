@@ -101,6 +101,24 @@ export default {
             className: 'nc-icon-outline text_quote',
             title: 'Quote'
           },
+          {
+            name: 'info',
+            action: (editor) => { createContainer(editor, "info"); },
+            className: 'nc-icon-outline travel_info',
+            title: 'Info'
+          },
+          {
+            name: 'warning',
+            action: (editor) => { createContainer(editor, "warning"); },
+            className: 'nc-icon-outline ui-2_alert-circle',
+            title: 'Warning'
+          },
+          {
+            name: 'danger',
+            action: (editor) => { createContainer(editor, "danger"); },
+            className: 'nc-icon-outline ui-2_alert-circle-',
+            title: 'Danger'
+          },
           '|',
           {
             name: 'unordered-list',
@@ -216,4 +234,36 @@ export default {
       this.$store.dispatch('pageLoader/complete')
     })
   }
+}
+
+function createContainer(editor, name){
+    const cm = editor.codemirror;
+    
+    var startPoint = cm.getCursor("start");
+    var endPoint = cm.getCursor("end");
+    
+    let linePositions = [startPoint.line]
+    
+    console.log(endPoint.line);
+    console.log(startPoint.line);
+    
+    if (endPoint.line != startPoint.line)
+        linePositions.push(endPoint.line);
+    
+    for (let lineI in linePositions){
+        const line = linePositions[lineI];
+        let txt = cm.getLine(line);
+        if (line == startPoint.line) txt = "::: "+name+"\n"+txt;
+        if (line == endPoint.line) txt += "\n:::";
+        
+        cm.replaceRange(txt, {
+            line: line,
+            ch: 0
+        }, {
+            line: line,
+            ch: 99999999999999
+        });
+    } 
+    cm.focus();         
+
 }
