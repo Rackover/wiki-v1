@@ -1,6 +1,5 @@
 .footer {
     text-align:center;
-	background-color: mc('blue-grey','50');
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -8,7 +7,6 @@
   height: 30px;
 	font-size: 13px;
 	font-weight: 500;
-	color: mc('blue-grey','500');
   position: absolute;
   right: 0;
   bottom: 0;
@@ -33,9 +31,16 @@
 
   @each $color, $colorvalue in $material-colors {
 		&.is-#{$color} {
-      background-color: mc($color,'50');
-      color: mc($color,'500');
-    }
+            background-color: mc($color,'500');
+            color: mc($color,'50');
+        }
+		a {
+            color: mc($color, '50');
+            
+            &:hover {
+              color: mc($color, '200');
+            }
+        }
   }
 
 }

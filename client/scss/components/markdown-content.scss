@@ -345,9 +345,9 @@
 		border-top: 1px dotted mc('grey', '500');
 	}
 
-	blockquote, div.warning {
+	blockquote {
 		background-color: mc('teal', '50');
-    background: linear-gradient(to bottom right, lighten(mc('teal', '50'), 5%), mc('teal', '50'));
+        background: linear-gradient(to bottom right, lighten(mc('teal', '50'), 5%), mc('teal', '50'));
 		border: 1px solid mc('teal', '100');
 		border-left-width: 7px;
 		box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,1);
@@ -366,14 +366,23 @@
 			strong {
 				color: inherit;
 			}
-
 		}
+        
+        span.title{      
+            font-weight:700;
+            line-height:1.1em;
+            text-transform: uppercase;
+        }
+        
+        span.title > *{
+            margin:5px;
+        }
 
 		&.is-danger {
 			background-color: mc('red', '100');
       background: linear-gradient(to bottom right, lighten(mc('red', '50'), 5%), mc('red', '50'));
 			border-color: mc('red', '200');
-			p {
+			p, span.title {
 				color: mc('red', '900');
 			}
 		}
@@ -382,7 +391,7 @@
 			background-color: mc('amber', '50');
       background: linear-gradient(to bottom right, lighten(mc('amber', '50'), 5%), mc('amber', '50'));
 			border-color: mc('amber', '200');
-			p {
+			p, span.title {
 				color: darken(mc('amber', '900'), 10%);
 			}
 		}
@@ -391,7 +400,7 @@
 			background-color: mc('green', '50');
       background: linear-gradient(to bottom right, lighten(mc('green', '50'), 5%), mc('green', '50'));
 			border-color: mc('green', '200');
-			p {
+			p, span.title {
 				color: darken(mc('green', '900'), 10%);
 			}
 		}
@@ -400,7 +409,7 @@
 			background-color: mc('blue', '50');
       background: linear-gradient(to bottom right, lighten(mc('blue', '50'), 5%), mc('blue', '50'));
 			border-color: mc('blue', '200');
-			p {
+			p, span.title {
 				color: darken(mc('blue', '900'), 10%);
 			}
 		}
