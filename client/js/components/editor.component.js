@@ -214,6 +214,40 @@ export default {
           'toggleCodeBlock': null
         }
       })
+      
+      mde.codemirror.on("inputRead", function(cm, event){
+          if (event.origin == "paste"){
+            let text = "";
+            let k;
+            for (k in event.text){
+                if (k > 0){
+                    text += "\n";
+                }
+                text += event.text[k];
+            }
+            
+            let newText = text;
+            let myRoot = "/" + self.currentPath.split("/")[0];
+            const linkComponents = text.split("/");
+            
+            if (text.includes(myRoot)){
+                const URIComponents = text.replace("http://", "").replace("https://", "").split("/");
+                URIComponents.shift();
+                const title = URIComponents[URIComponents.length-1]
+                newText = "["+title.toUpperCase().charAt(0).toUpperCase() + title.slice(1)+"](/"+URIComponents.join("/")+")";
+            }
+            else if (linkComponents[0].includes("http")){
+                const title = linkComponents[linkComponents.length-1];
+                newText = "["+title.toUpperCase().charAt(0).toUpperCase() + title.slice(1)+"]("+text+")";
+            }
+            
+            cm.refresh();
+            // my first idea was
+            // note: for multiline strings may need more complex calculations
+            cm.replaceRange(newText, event.from, {line: event.from.line, ch: event.from.ch + text.length});
+          
+          }
+      });
 
       // Save
       $(window).bind('keydown', (ev) => {
