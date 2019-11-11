@@ -41,7 +41,7 @@
                         option(value='right') {{ $t('editor.imagealignright') }}
                         option(value='logo') {{ $t('editor.imagealignlogo') }}
                 .column.editor-modal-choices.editor-modal-file-choices(v-if='mode === "file"')
-                  figure(v-for='fl in files', :class='{ "is-active": currentFile === fl._id }', @click='selectFile(fl._id)', :data-uid='fl._id')
+                  figure(v-for='fl in files', :class='{ "is-active": currentFile === fl.uid }', @click='selectFile(fl.uid)', :data-uid='fl.uid')
                     i(class='icon-file')
                     span: strong {{ fl.filename }}
                     span {{ fl.mime }}
@@ -50,8 +50,8 @@
                     i.icon-marquee-minus
                     | {{ $t('editor.filefolderempty') }}
                 .column.editor-modal-choices.editor-modal-image-choices(v-if='mode === "image"')
-                  figure(v-for='img in files', v-bind:class='{ "is-active": currentFile === img._id }', v-on:click='selectFile(img._id)', v-bind:data-uid='img._id')
-                    img(v-bind:src='"/uploads/t/" + img._id + ".png"')
+                  figure(v-for='img in files', v-bind:class='{ "is-active": currentFile === img.uid }', v-on:click='selectFile(img.uid)', v-bind:data-uid='img.uid')
+                    img(v-bind:src='"/uploads/t/" + img.uid + ".png"')
                     span: strong {{ img.basename }}
                     span {{ filesize(img.filesize) }}
                   em(v-show='files.length < 1')
@@ -166,7 +166,7 @@
       init () {
 		const oSelf = this;
         $(this.$refs.editorFileUploadInput).on('change', function(){
-			// Manual update of the value... because it's somehow needed$
+			// Manual update of the value... because it's somehow needed
 			oSelf.$refs.editorFileUploadInput = this;			
 			oSelf.upload()
 		})
@@ -188,7 +188,7 @@
         this.currentFile = fileId
       },
       insertFileLink() {
-        let selFile = this._.find(this.files, ['_id', this.currentFile])
+        let selFile = this._.find(this.files, ['uid', this.currentFile])
         selFile.normalizedPath = (selFile.folder === 'f:') ? selFile.filename : selFile.folder.slice(2) + '/' + selFile.filename
         selFile.titleGuess = this._.startCase(selFile.basename)
 
@@ -304,7 +304,7 @@
 
       renameFile() {
         let self = this
-        let c = this._.find(this.files, [ '_id', this.renameFileId ])
+        let c = this._.find(this.files, [ 'uid', this.renameFileId ])
         this.renameFileFilename = c.basename || ''
         this.renameFileShow = true
         this._.delay(() => {
@@ -371,7 +371,7 @@
 
       deleteFileWarn(show) {
         if (show) {
-          let c = this._.find(this.files, [ '_id', this.deleteFileId ])
+          let c = this._.find(this.files, [ 'uid', this.deleteFileId ])
           this.deleteFileFilename = c.filename || this.$t('editor.filedeletedefault')
         }
         this.deleteFileShow = show

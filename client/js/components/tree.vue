@@ -3,13 +3,13 @@
     ul.collapsable-nav(v-for='treeItem in tree', :class='{ "has-children": treeItem.hasChildren }', v-cloak)
       li(v-for='page in treeItem.pages', :class='{ "is-active": page.isActive }')
         a(v-on:click='mainAction(page)')
-          template(v-if='page._id !== "home"')
+          template(v-if='page.path !== "home"')
             i(:class='{ "icon-folder2": page.isDirectory, "icon-file-text-o": !page.isDirectory }')
             span {{ page.title }}
           template(v-else)
             i.icon-home
             span {{ $t('nav.home') }}
-        a.is-pagelink(v-if='page.isDirectory && page.isEntry', v-on:click='goto(page._id)')
+        a.is-pagelink(v-if='page.isDirectory && page.isEntry', v-on:click='goto(page.path)')
           i.icon-file-text-o
           i.icon-arrow-right2
 </template>
@@ -31,7 +31,7 @@
             if (self.tree.length > 0) {
               let branch = self._.last(self.tree)
               branch.hasChildren = true
-              self._.find(branch.pages, { _id: basePath }).isActive = true
+              self._.find(branch.pages, { path: basePath }).isActive = true
             }
             self.tree.push({
               hasChildren: false,
@@ -49,7 +49,7 @@
         let lastIndex = 0
         self._.forEach(self.tree, branch => {
           lastIndex++
-          if (self._.find(branch.pages, { _id: entryPath }) !== undefined) {
+          if (self._.find(branch.pages, { path: entryPath }) !== undefined) {
             return false
           }
         })
@@ -63,11 +63,11 @@
       mainAction (page) {
         let self = this
         if (page.isActive) {
-          self.unfold(page._id)
+          self.unfold(page.path)
         } else if (page.isDirectory) {
-          self.fetch(page._id)
+          self.fetch(page.path)
         } else {
-          self.goto(page._id)
+          self.goto(page.path)
         }
       }
     },
