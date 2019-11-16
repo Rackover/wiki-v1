@@ -60,7 +60,7 @@ export default {
   },
   mounted() {
     let usr = JSON.parse(this.usrdata)
-    this.id = usr._id
+    this.id = usr.id
     this.email = usr.email
     this.name = usr.name
 
