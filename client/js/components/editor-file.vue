@@ -410,6 +410,7 @@
         this.currentImage = ''
         this.$nextTick(() => {
           socket.emit('uploadsGetFolders', { }, (data) => {
+            // console.log("Received folders from remote: "+JSON.stringify(data, null, 4))
             self.folders = data
             self.loadFiles()
           })
@@ -426,6 +427,7 @@
           self.$nextTick(() => {
             let loadAction = (self.mode === 'image') ? 'uploadsGetImages' : 'uploadsGetFiles'
             socket.emit(loadAction, { folder: self.currentFolder }, (data) => {
+            // console.log("Received files from remote: "+JSON.stringify(data, null, 4))
               self.files = data
               if (!silent) {
                 self.isLoading = false

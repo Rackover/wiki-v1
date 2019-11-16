@@ -279,9 +279,6 @@ function createContainer(editor, name){
     
     let linePositions = [startPoint.line]
     
-    console.log(endPoint.line);
-    console.log(startPoint.line);
-    
     if (endPoint.line != startPoint.line)
         linePositions.push(endPoint.line);
     
